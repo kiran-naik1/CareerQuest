@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Quest - AI Career Recommender</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Career Recommendation Section -->
+      <div class="top-section">
+        <h1>Career Quest</h1>
+        <p>Enter your details, and let AI suggest the best career for you.</p>
+
+        <div class="form-group">
+          <label for="education">Education:</label>
+          <input
+            type="text"
+            id="education"
+            placeholder="E.g. Bachelor's in Computer Science"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills:</label>
+          <input
+            type="text"
+            id="skills"
+            placeholder="E.g. Python, Machine Learning"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="interests">Interests:</label>
+          <input
+            type="text"
+            id="interests"
+            placeholder="E.g. Data Science, AI"
+          />
+        </div>
+
+        <button onclick="getRecommendation()">Get Career Suggestion</button>
+
+        <div id="career-result" class="result-box"></div>
+      </div>
+
+      <!-- Bottom Section (Jobs & Courses) -->
+      <div class="bottom-section">
+        <div class="jobs-container">
+          <h2>🔹 Job Openings</h2>
+          <div id="jobs-result">Jobs will appear here...</div>
+        </div>
+
+        <div class="courses-container">
+          <h2>📚 Recommended Courses</h2>
+          <div id="courses-result">Courses will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
