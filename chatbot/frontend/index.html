@@ -3,26 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chatbot</title>
+    <title>AI Chatbot</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div class="chat-container">
-      <div class="chat-header">
-        <img src="assistant.png" style="height: 2rem" />AI Chatbot
+      <h1>AI Chatbot</h1>
+      <div class="chat-box" id="chat-box">
+        <div class="bot-message">Hello! How can I assist you today?</div>
       </div>
-      <div class="chatbox" id="chatbox"></div>
-      <div class="chat-input">
-        <input
-          type="text"
-          id="userInput"
-          placeholder="Type your message..."
-          onkeypress="handleKeyPress(event)"
-        />
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type your message..." />
         <button onclick="sendMessage()">Send</button>
       </div>
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>
