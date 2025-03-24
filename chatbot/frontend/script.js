@@ -1,29 +1,44 @@
-async function sendMessage() {
-  let userInput = document.getElementById("userInput").value.trim();
-  if (!userInput) return;
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
 
-  let chatbox = document.getElementById("chatbox");
-  chatbox.innerHTML += `<p class="user-message"><strong>You:</strong> ${userInput}</p>`;
-  document.getElementById("userInput").value = "";
-  chatbox.scrollTop = chatbox.scrollHeight;
+function sendMessage() {
+  let message = userInput.value.trim();
+  if (message === "") return;
 
-  try {
-    let response = await fetch("http://127.0.0.1:5000/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userInput }),
+  // Display user message
+  displayMessage(message, "user-message");
+
+  // Send message to backend
+  fetch("https://chatbot-backend-egnk.onrender.com/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message: message }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      displayMessage(data.response, "bot-message");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      displayMessage("Error communicating with the chatbot.", "bot-message");
     });
 
-    let data = await response.json();
-    chatbox.innerHTML += `<p class="bot-message"><strong>Bot:</strong> ${data.response}</p>`;
-    chatbox.scrollTop = chatbox.scrollHeight;
-  } catch (error) {
-    chatbox.innerHTML += `<p class="bot-message"><strong>Bot:</strong> Error connecting to the server.</p>`;
-  }
+  userInput.value = "";
 }
 
-function handleKeyPress(event) {
+function displayMessage(text, className) {
+  let messageDiv = document.createElement("div");
+  messageDiv.classList.add(className);
+  messageDiv.textContent = text;
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Allow sending message with Enter key
+userInput.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     sendMessage();
   }
-}
+});
